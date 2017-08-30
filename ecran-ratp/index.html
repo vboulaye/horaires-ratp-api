@@ -1,43 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Proto RATP API</title>
     <link href="css/bootstrap-cosmo.css" rel="stylesheet"/>
     <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
     <link href="css/fix.css" rel="stylesheet"/>
-  </head>
-  <body>
-    <div id="content"></div>
-    <script type="text/x-template" id="page-template">
-      <table class="table">
+</head>
+<body>
+<div id="content"></div>
+<script type="text/x-template" id="page-template">
+    <table class="table">
         <tbody>
-          <tr class="tr-header">
+        <tr class="tr-header">
             <td class="td1">
-              <img src="img/ratp/logo-<%= type %>.png" alt="" class="rer-logo" />
-              <img src="img/ratp/logo-<%= type %>-<%= line %>.png" alt="" class="rer-ligne" />
-              <p>Station: <%= station %></p>
-              <p>Direction: <%= destination %></p>
+                <img src="img/ratp/logo-<%= type %>.png" alt="" class="rer-logo"/>
+                <img src="img/ratp/logo-<%= type %>-<%= line %>.png" alt="" class="rer-ligne"/>
+                <p style="font-size: 51px"><%= station %></p>
             </td>
-            <td colspan="2" class="td2-header"><p><%= current_time %></p></td>
-          </tr>
-          <% _.map(horaires, function (horaire, i) { %>
-            <tr class="<% if(i%2) { %>bg-tr <% } %>tr-normal">
-              <td class="td1"><p><%= horaire.destination %></p></td>
-              <td class="td2"><p><%= horaire.id %></p></td>
-              <td class="td3"><p><%= horaire.message %></p></td>
-            </tr>
-          <% }) %>
+            <td class="td2-header"><p><%= current_time %></p></td>
+        </tr>
+        <tr class="tr-header">
+            <td class="td1" style="text-align: center">
+                <% _.map(destination, function (destination, i) { %>
+                <p style="padding:0">
+                    <%= destination %>
+                </p>
+                <% }) %>
+            </td>
+            <td class="td1" style="text-align: center">
+                <% _.map(destination_r, function (destination, i) { %>
+                <p style="padding:0">
+                <%= destination %>
+                </p>
+                <% }) %>
+            </td>
+        </tr>
+        <tr>
 
-          <tr class="tr-trafic">
+            <td>
+                <table class="table">
+                    <% _.map(horaires, function (horaire, i) { %>
+                    <tr class="<% if(i%2) { %>bg-tr <% } %>tr-normal">
+                        <td class="td1"><p><%= horaire.message %></p></td>
+                        <td class="td3"><p><%= horaire.code %></p></td>
+                    </tr>
+                    <% }) %>
+                </table>
+            </td>
+            <td>
+                <table class="table">
+                    <% _.map(horaires_r, function (horaire, i) { %>
+                    <tr class="<% if(i%2) { %>bg-tr <% } %>tr-normal">
+                        <td class="td1"><p><%= horaire.message %></p></td>
+                        <td class="td3"><p><%= horaire.code %></p></td>
+                    </tr>
+                    <% }) %>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="tr-trafic">
             <td class="tdfull" colspan="3"><p><i><%= traffic %></i></p></td>
-          </tr>
+        </tr>
         </tbody>
-      </table>
-    </script>
-    <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/underscore.min.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+    </table>
+</script>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/underscore.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>
